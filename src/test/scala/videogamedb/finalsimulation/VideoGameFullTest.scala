@@ -94,6 +94,10 @@ class VideoGameFullTest extends Simulation {
       rampUsers(USERCOUNT).during(RAMPDURATION)
     )
   ).protocols(httpProtocol).maxDuration(TESTDURATION)
+    .assertions(
+      global.responseTime.max.lt(2),
+      global.successfulRequests.percent.gt(99)
+    )
 
   after(
     print("Stress test completed")
